@@ -1,0 +1,38 @@
+name = "auto-reaction-77"
+main = "api/worker.js"
+compatibility_date = "2026-10-02"
+
+# Deploy-to-Cloudflare provisions these resources automatically.
+# Cloudflare replaces the demo database ID with the real ID during setup.
+[[d1_databases]]
+binding = "DB"
+database_name = "reaction-bot"
+database_id = "cdaa6318-dc11-4514-9ea1-57cf79bfe89b"
+
+[[queues.producers]]
+binding = "BROADCAST_QUEUE"
+queue = "broadcast-queue"
+
+[[queues.consumers]]
+queue = "broadcast-queue"
+max_batch_size = 1
+max_concurrency = 1
+max_retries = 1
+
+# Non-secret defaults. These values appear in the Deploy to Cloudflare setup screen.
+[vars]
+BOT_USERNAME = "ReactionsXBot"
+EMOJI_LIST = "👍  ❤️ 🔥 🥰 👏 😁 🤔 🤯 🎉 🤩  🙏 👌 🕊 🥱 😍 🐳 ❤️‍🔥 🌚 💯 🤣 😂  🍓 🍾 💋 😎 👨‍💻 👀 🎃 🙈 😇 😨 🤝 ✍️ 🤗 🫡 🎅 🎄 ☃️ 💅 🤪 🗿 🆒 💘 🙉 🦄 😘 💊 🙊"
+RANDOM_LEVEL = "0"
+RESTRICTED_CHATS = "textify"
+ADMIN_IDS = "7387793694"
+UPDATES_URL = "https://t.me/+V6ZWf2k9vV1kZmI1"
+SUPPORT_URL = "https://t.me/TheComGC"
+START_ANIMATION = "https://graph.org/file/4bf5f939d9677934dead3-41662e678f6eca34b4.mp4"
+DONATE_ANIMATION = "https://graph.org/file/e64807a85f15706730cb2-b2e366b966eede7966.mp4"
+LOG_LEVEL = "info"
+AUTO_SET_WEBHOOK = "true"
+
+# BOT_TOKEN is sensitive and must be entered as a secret during deployment.
+[secrets]
+required = ["BOT_TOKEN"]
